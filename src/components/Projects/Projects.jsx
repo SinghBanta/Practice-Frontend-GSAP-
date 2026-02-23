@@ -1,58 +1,64 @@
+"use client";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Card from '../Card/Card'
-import "./Projects.css"
-import { useGSAP } from '@gsap/react'
-
-gsap.registerPlugin(ScrollTrigger)
-// import va from "../../assets/va.png";
-// import fw from "../../assets/fw.png";
+import Card from "../Card/Card";
+import "./Projects.css";
 
 function Projects() {
-  useGSAP(()=>{
-   gsap.from("#para",{
-      y:100,
-      duration:1,
-      opacity:0,
-      stagger:1,
-      scrollTrigger: {
-        trigger: "#para",
-        scroll:"body",
-        scrub:2,
-        // markers:true,
-        start: "top 80%",
-        end: "top 30%"
-      }
-    })
-    gsap.from(".slider",{
-      y:100,
-      duration:1,
-      opacity:0,
-      stagger:1,
-      scrollTrigger: {
-        trigger: ".slider",
-        scroll:"body",
-        scrub:2,
-        // markers:true,
-        start: "top 80%",
-        end: "top 30%"
-      }
-    })
-  })
-
   return (
     <div id="projects">
-        <h1 id="para">2+ YEARS EXPERIENCED IN PROJECTS</h1>
-        <div className='slider'>
-            <Card title="VIRTUAL ASSISTANT" />
-            <Card  title="AI POWERED FITNESS WEBSITE"/>
-            <Card  title="VIRTUAL ASSISTANT"/>
-            <Card  title="VIRTUAL ASSISTANT"/>
-        </div>
+      <h1 id="para">2+ YEARS EXPERIENCED IN PROJECTS</h1>
 
+      <Swiper
+        slidesPerView={3}
+        spaceBetween={10}
+        centeredSlides={true}
+        loop={true}
+        modules={[Pagination, Autoplay]}
+        pagination={{ clickable: true }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        }}
+        className="slider"
+      >
+        <SwiperSlide>
+          <Card title="VIRTUAL ASSISTANT" />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Card title="AI POWERED FITNESS WEBSITE" />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Card title="PORTFOLIO WEBSITE" />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Card title="E-COMMERCE APP" />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Card title="Second Brain" />
+        </SwiperSlide>
+      </Swiper>
     </div>
-  )
+  );
 }
 
-export default Projects
+export default Projects;

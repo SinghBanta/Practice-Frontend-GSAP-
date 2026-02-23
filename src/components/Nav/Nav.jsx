@@ -1,57 +1,102 @@
-import React, { useRef } from 'react'
-import {Link} from 'react-scroll';
-import {useGSAP} from '@gsap/react';
-import gsap from 'gsap';
-import './Nav.css'
+import React, { useState } from "react";
+import { Link } from "react-scroll";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import "./Nav.css";
+import Swiper from 'swiper';
+import 'swiper/css';
+
 const Nav = () => {
-    let menu=useRef();
-    let mobile=useRef();
-    // console.log(menu);
-    // console.log(mobile);
+  const [open, setOpen] = useState(false);
 
-    useGSAP(()=>{
-        let tl=gsap.timeline();
-        tl.from("nav h1",{
-            y:-100,
-            duration:1,
-            opacity:0,
-        })
-        tl.from("nav ul li",{
-            y:-100,
-            stagger:1
-        })
 
-    })
+  const toggleMenu = () => {
+    setOpen(prev => !prev);
+  };
+
+  const closeMenu = () => {
+    setOpen(false);
+  };
+
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    tl.from("nav h1", {
+      y: -100,
+      duration: 1,
+      opacity: 0,
+    });
+
+    tl.from(".desktopMenu li", {
+      y: -50,
+      stagger: 0.2,
+      opacity: 0,
+    });
+  }, []);
+
   return (
-    <div>
-        <nav>
-           <h1>PORTFOLIO</h1>
-           <ul className='desktopMenu'>
-            <Link activeClass="active" to='home' smooth={true} duration={500} spy={true}><li>Home</li></Link>
-            <Link activeClass="active" to='about' smooth={true} duration={500} spy={true}><li>About</li></Link>
-            <Link activeClass="active" to='projects' smooth={true} duration={500} spy={true}><li>Projects</li></Link>
-            <Link activeClass="active" to='contact' smooth={true} duration={500} spy={true}><li>Contact</li></Link>
-            </ul> 
+    <nav>
+      <h1>PORTFOLIO</h1>
 
-            <div className="hamburger" ref={menu} onClick={()=>{
-                mobile.current.classList.toggle('activeMobile');
-                menu.current.classList.toggle('activeHam');
+      {/* Desktop Menu */}
+      <ul className="desktopMenu">
+        <li>
+          <Link to="home" smooth duration={500} spy activeClass="active">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="about" smooth duration={500} spy activeClass="active">
+            About
+          </Link>
+        </li>
+        <li>
+          <Link to="projects" smooth duration={500} spy activeClass="active">
+            Projects
+          </Link>
+        </li>
+        <li>
+          <Link to="contact" smooth duration={500} spy activeClass="active">
+            Contact
+          </Link>
+        </li>
+      </ul>
 
-            }}>
-                <div className="ham "></div>
-                <div className="ham "></div>
-                <div className="ham "></div>
-            </div>
+      {/* Hamburger */}
+      <div
+        className={`hamburger ${open ? "active" : ""}`}
+        onClick={toggleMenu}
+      >
+        <div className="ham"></div>
+        <div className="ham"></div>
+        <div className="ham"></div>
+      </div>
 
-            <ul className='mobileMenu' ref={mobile}>
-            <Link activeClass="active" to='home' smooth={true} duration={500} spy={true}>Home</Link>
-            <Link activeClass="active" to='about' smooth={true} duration={500} spy={true}>About</Link>
-            <Link activeClass="active" to='projects' smooth={true} duration={500} spy={true}>Projects</Link>
-            <Link activeClass="active" to='contact' smooth={true} duration={500} spy={true}>Contact</Link>
-            </ul> 
-        </nav>
-    </div>
-  )
-}
+      {/* Mobile Menu */}
+      <ul className={`mobileMenu ${open ? "active" : ""}`}>
+        <li>
+          <Link to="home" smooth duration={500} spy onClick={closeMenu}>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="about" smooth duration={500} spy onClick={closeMenu}>
+            About
+          </Link>
+        </li>
+        <li>
+          <Link to="projects" smooth duration={500} spy onClick={closeMenu}>
+            Projects
+          </Link>
+        </li>
+        <li>
+          <Link to="contact" smooth duration={500} spy onClick={closeMenu}>
+            Contact
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
-export default Nav
+export default Nav;
