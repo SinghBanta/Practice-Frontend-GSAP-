@@ -52,7 +52,12 @@ form:hover{
     box-shadow: 2px 2px 10px rgb(87, 195, 219), 2px 2px 20px rgb(82, 205, 207);
 }
 
-
+.section h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
 
 
 form input{
