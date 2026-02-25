@@ -3,15 +3,12 @@ import { Link } from "react-scroll";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import "./Nav.css";
-import Swiper from 'swiper';
-import 'swiper/css';
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
 
-
   const toggleMenu = () => {
-    setOpen(prev => !prev);
+    setOpen((prev) => !prev);
   };
 
   const closeMenu = () => {

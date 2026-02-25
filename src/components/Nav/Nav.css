@@ -1,3 +1,5 @@
+/* ================= NAVBAR ================= */
+
 nav {
   display: flex;
   align-items: center;
@@ -8,14 +10,16 @@ nav {
   top: 0;
   z-index: 20;
   background: rgb(17, 20, 23);
-  /* overflow: hidden; */
-}
-.active {
-  color: rgb(107, 211, 211);
-  border-bottom: 2px solid white;
 }
 
-nav ul {
+/* Active link */
+.active {
+  color: rgb(107, 211, 211);
+}
+
+/* ================= DESKTOP MENU ================= */
+
+.desktopMenu {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,6 +37,8 @@ nav h1 {
 
 nav ul a {
   cursor: pointer;
+  text-decoration: none;
+  color: white;
 }
 
 nav ul a:hover {
@@ -40,59 +46,75 @@ nav ul a:hover {
   border-bottom: 2px solid white;
 }
 
+/* ================= HAMBURGER ================= */
+
 .hamburger {
-  display: flex;
+  display: none; /* Hidden on desktop */
   flex-direction: column;
   gap: 8px;
   cursor: pointer;
-  display: none;
+  z-index: 21;
 }
 
 .ham {
-  width: 40px;
-  height: 2px;
+  width: 35px;
+  height: 3px;
   background-color: aliceblue;
+  transition: 0.3s ease;
 }
 
-.mobileMenu {
-  position: absolute;
-  top: 80px;
-  width: 100%;
-  height: 100vh;
-  background-color: rgb(17, 20, 23);
-  opacity: 90%;
-  backdrop-filter: blur(100px);
-  right: 0;
-  transform: translateX(100%);
-  flex-direction: column;
-  display: flex; /* ✅ ALWAYS flex */
-  transition: transform 0.5s ease;
-}
-
-.activeMobile {
-  transform: translateX(0);
-}
-.activeHam .ham:nth-child(1) {
+/* Hamburger animation when active */
+.hamburger.active .ham:nth-child(1) {
   transform: rotate(45deg);
   position: relative;
-  top: 8px;
+  top: 10px;
 }
 
-.activeHam .ham:nth-child(2) {
+.hamburger.active .ham:nth-child(2) {
   opacity: 0;
 }
 
-.activeHam .ham:nth-child(3) {
+.hamburger.active .ham:nth-child(3) {
   transform: rotate(-45deg);
   position: relative;
   top: -12px;
 }
 
+/* ================= MOBILE MENU ================= */
+
+.mobileMenu {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(17, 20, 23);
+  backdrop-filter: blur(100px);
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 40px;
+  padding-top: 60px;
+  list-style: none;
+  z-index: 19;
+}
+
+/* When open */
+.mobileMenu.active {
+  transform: translateX(0);
+}
+
+/* ================= RESPONSIVE ================= */
+
 @media (max-width: 750px) {
   .desktopMenu {
     display: none;
   }
+
   .hamburger {
-    display:flex;
+    display: flex;
   }
 }
